@@ -11,17 +11,8 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import { useQueryState, parseAsStringLiteral } from "nuqs";
 import { usePeriod } from "@/components/PeriodFilter";
 import ErrorState from "@/components/ErrorState";
+import { COINS, COIN_IDS } from "@/lib/coins";
 import type { ChartData } from "@/lib/types";
-
-const COINS = [
-  { id: "bitcoin", label: "Bitcoin" },
-  { id: "ethereum", label: "Ethereum" },
-  { id: "solana", label: "Solana" },
-  { id: "ripple", label: "XRP" },
-  { id: "dogecoin", label: "Dogecoin" },
-] as const;
-
-const COIN_IDS = COINS.map((c) => c.id);
 
 export default function PriceHistoryChart() {
   const [period] = usePeriod();

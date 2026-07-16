@@ -26,6 +26,20 @@ server-side in the NextJS backend, which also caches upstream responses
 to a consistent `{error, code, status}` JSON shape (429 rate-limit + `Retry-After`,
 404, 502/504, 400 for invalid input); raw upstream detail is logged, never forwarded.
 
+The `/api/*` route handlers and the dashboard page (`app/page.tsx`) both call
+the same server-only functions in `lib/data.ts` (which sit on top of the 60s
+cache), rather than the page fetching its own `/api/*` routes over HTTP.
+`app/page.tsx` reads `?period=`/`?coin=` from `searchParams` on the server,
+fetches matching data there, and seeds it into a per-page `SWRConfig`
+`fallback` map so the initial HTML has real content instead of loading
+skeletons — the client's first `useSWR` call for the same key reuses that
+seed instead of re-fetching. This opts `/` into dynamic (per-request)
+rendering instead of static prerendering, since the seeded data depends on
+the request's query string. Each server-side fetch is independent
+(`Promise.allSettled`): if one upstream call fails, that widget just falls
+back to its normal client-side fetch and error state instead of failing the
+whole page.
+
 ### Time-period filter
 `Today → 1 day`, `Last week → 7`, `Last month → 30`, `Last quarter → 90`.
 - The **price-history chart** (metric 3) uses the full day range.
