@@ -1,66 +1,45 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { Suspense } from "react";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
+import PeriodFilter from "@/components/PeriodFilter";
+import LivePrices from "@/components/LivePrices";
+import MarketOverview from "@/components/MarketOverview";
+import PriceHistoryChart from "@/components/PriceHistoryChart";
+import TrendingCoins from "@/components/TrendingCoins";
+import ExchangeVolume from "@/components/ExchangeVolume";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Suspense fallback={<Skeleton variant="rounded" height={600} />}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+          <Typography variant="h4" component="h1">
+            Crypto Dashboard
+          </Typography>
+          <PeriodFilter />
+        </Box>
+
+        <Grid container spacing={3}>
+          <Grid size={12}>
+            <MarketOverview />
+          </Grid>
+          <Grid size={{ xs: 12, md: 7 }}>
+            <LivePrices />
+          </Grid>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <PriceHistoryChart />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <TrendingCoins />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <ExchangeVolume />
+          </Grid>
+        </Grid>
+      </Suspense>
+    </Container>
   );
 }
