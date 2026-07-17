@@ -1,5 +1,7 @@
 # Crypto Dashboard (v3)
 
+[![CI](https://github.com/benmcosker/crypto-dashboard-v3/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/benmcosker/crypto-dashboard-v3/actions/workflows/ci.yml)
+
 A real-time cryptocurrency market dashboard built as a single **Next.js**
 (App Router) app with **Material UI**, powered by the live
 [CoinGecko API](https://docs.coingecko.com/). Successor to the
