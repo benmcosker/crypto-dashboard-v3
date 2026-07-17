@@ -30,6 +30,7 @@ It surfaces five live metrics, all filterable by time period (**Today / Last wee
 - [Configuration](#configuration)
 - [Running the app](#running-the-app)
 - [Running the tests](#running-the-tests)
+- [Running the e2e tests](#running-the-e2e-tests)
 - [Production build](#production-build)
 - [API reference](#api-reference)
 - [Project structure](#project-structure)
@@ -172,6 +173,43 @@ and all 5 widget components in their loading / success / error states
 
 ---
 
+## Running the e2e tests
+
+End-to-end tests use **Cypress**, driving a real `next dev` server in a browser:
+
+```bash
+npm run e2e          # headless: boots next dev, runs all specs, tears it down
+npm run e2e:open      # same, but opens the interactive Cypress runner
+```
+
+If you already have `npm run dev` running in another terminal:
+
+```bash
+npm run cy:run        # headless
+npm run cy:open        # interactive
+```
+
+No `COINGECKO_API_KEY` is required for these to pass. Every spec calls
+`cy.interceptDashboardApis()` before visiting the page, which stubs all five
+`/api/*` routes with fixtures from `cypress/fixtures/`. The server-rendered
+first paint still fetches real data (or errors, without a key) before Cypress
+ever sees it, but SWR always revalidates each key on mount, so the browser
+immediately re-fetches every `/api/*` route right into the stubs — tests
+assert against that converged, deterministic state. Pass per-route overrides
+to test error states, e.g. `cy.interceptDashboardApis({ markets: { statusCode: 429 } })`
+(see `cypress/e2e/error-states.cy.ts`).
+
+Specs live in `cypress/e2e/`:
+
+| Spec | Covers |
+|------|--------|
+| `dashboard.cy.ts` | All five widgets render with fixture data; the period filter is visible. |
+| `period-filter.cy.ts` | Picking a period updates the URL and re-fetches only the period-scoped widgets. |
+| `coin-selector.cy.ts` | Changing the chart's coin updates the URL and re-fetches `/api/chart/{id}`. |
+| `error-states.cy.ts` | 429 rate-limit and generic upstream-error alerts render correctly. |
+
+---
+
 ## Production build
 
 ```bash
@@ -240,7 +278,15 @@ crypto-dashboard-v3/
 │   └── types.ts
 │
 ├── theme/theme.ts               # MUI theme
-└── test/render.tsx              # renderWithProviders test helper
+├── test/render.tsx              # renderWithProviders test helper
+│
+├── cypress/
+│   ├── e2e/                     # dashboard.cy.ts, period-filter.cy.ts, coin-selector.cy.ts, error-states.cy.ts
+│   ├── fixtures/                 # markets/global/chart/trending/exchanges.json
+│   └── support/
+│       ├── commands.ts           # cy.interceptDashboardApis()
+│       └── e2e.ts
+└── cypress.config.ts
 ```
 
 ---

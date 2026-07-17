@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pepe",
+    "name": "Pepe",
+    "symbol": "pepe",
+    "market_cap_rank": 34,
+    "thumb": "https://assets.coingecko.com/coins/images/29850/thumb/pepe-token.jpeg",
+    "price_btc": 0.0000000012
+  },
+  {
+    "id": "dogwifhat",
+    "name": "dogwifhat",
+    "symbol": "wif",
+    "market_cap_rank": 58,
+    "thumb": "https://assets.coingecko.com/coins/images/33566/thumb/dogwifhat.jpg",
+    "price_btc": 0.0000345
+  }
+]

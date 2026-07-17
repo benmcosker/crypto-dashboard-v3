@@ -1,0 +1,16 @@
+[
+  {
+    "id": "binance",
+    "name": "Binance",
+    "image": "https://assets.coingecko.com/markets/images/52/small/binance.jpg",
+    "trust_score": 10,
+    "trade_volume_24h_btc": 125000
+  },
+  {
+    "id": "coinbase",
+    "name": "Coinbase Exchange",
+    "image": "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png",
+    "trust_score": 10,
+    "trade_volume_24h_btc": 45000
+  }
+]

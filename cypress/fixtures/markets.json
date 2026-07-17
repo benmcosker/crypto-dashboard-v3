@@ -1,0 +1,20 @@
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "name": "Bitcoin",
+    "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png",
+    "current_price": 65000.12,
+    "price_change_percentage": 2.34,
+    "sparkline_in_7d": { "price": [64000, 64500, 65000, 64800, 65200, 65100, 65000.12] }
+  },
+  {
+    "id": "ethereum",
+    "symbol": "eth",
+    "name": "Ethereum",
+    "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+    "current_price": 3200.5,
+    "price_change_percentage": -1.12,
+    "sparkline_in_7d": { "price": [3300, 3280, 3260, 3220, 3210, 3190, 3200.5] }
+  }
+]

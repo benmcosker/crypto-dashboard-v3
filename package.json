@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e": "start-server-and-test dev http://localhost:3000 cy:run",
+    "e2e:open": "start-server-and-test dev http://localhost:3000 cy:open"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -30,9 +34,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.3",
+    "cypress": "^15.18.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "jsdom": "^29.1.1",
+    "start-server-and-test": "^3.0.11",
     "typescript": "^5",
     "vitest": "^4.1.10"
   }

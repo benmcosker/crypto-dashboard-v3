@@ -91,6 +91,25 @@ mocking `lib/coingecko.ts`'s `cgFetch`; widgets are tested by stubbing
 `global.fetch` and rendering through the `renderWithProviders` helper in
 `test/render.tsx` (wraps `SWRConfig` + nuqs's `NuqsTestingAdapter`).
 
+### End-to-end (Cypress)
+
+`npm run e2e` boots `next dev`, waits for it to be reachable, then runs the
+specs in `cypress/e2e/` headlessly (`npm run e2e:open` for the interactive
+runner; `npm run cy:run`/`cy:run` assume the server is already running).
+
+Every spec calls `cy.interceptDashboardApis()` (defined in
+`cypress/support/commands.ts`) before `cy.visit("/")`, which stubs all five
+`/api/*` routes with fixtures from `cypress/fixtures/`. This sidesteps the
+SSR-fallback architecture described above: the server-rendered first paint
+still fetches real data from CoinGecko (or errors, if no key is configured)
+before Cypress ever sees the page, but SWR always revalidates every key on
+mount regardless of the seeded fallback, so the browser re-fetches each
+`/api/*` route immediately — right into the stubs. Assertions target that
+converged, deterministic state rather than the transient SSR content, so
+specs don't need a real `COINGECKO_API_KEY` to pass. Pass per-route overrides
+to `interceptDashboardApis({ markets: { statusCode: 429, ... } })` to test
+error states (see `cypress/e2e/error-states.cy.ts`).
+
 ## Build (production)
 
 ```
