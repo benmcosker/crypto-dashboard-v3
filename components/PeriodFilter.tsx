@@ -18,10 +18,8 @@ export default function PeriodFilter() {
       exclusive
       size="small"
       sx={{
-        border: 1,
-        borderColor: "divider",
-        borderRadius: 1,
         gap: 1,
+        padding: "5px !important"
       }}
 
       
