@@ -17,6 +17,14 @@ export default function PeriodFilter() {
       value={period}
       exclusive
       size="small"
+      sx={{
+        border: 1,
+        borderColor: "divider",
+        borderRadius: 1,
+        gap: 1,
+      }}
+
+      
       onChange={(_, value: PeriodDays | null) => {
         if (value !== null) setPeriod(value);
       }}
