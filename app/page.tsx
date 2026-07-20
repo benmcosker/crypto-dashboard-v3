@@ -60,8 +60,10 @@ export default async function Home({
           <Box
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: { xs: "stretch", sm: "center" },
+              gap: { xs: 2, sm: 0 },
               mb: 3,
               px: 3,
               py: 2,

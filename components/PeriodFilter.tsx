@@ -18,18 +18,21 @@ export default function PeriodFilter() {
       exclusive
       size="small"
       sx={{
+        width: { xs: "100%", sm: "auto" },
         "& .MuiToggleButtonGroup-grouped": {
           margin: 0,
           border: "none",
           borderRadius: "8px !important",
         },
         "& .MuiToggleButton-root": {
+          flex: { xs: 1, sm: "initial" },
           border: "none",
           borderRight: "1px solid rgba(255, 255, 255, 0.3)",
           color: "rgba(255, 255, 255, 0.85)",
           textTransform: "none",
           fontWeight: 500,
-          padding: "6px 16px !important",
+          fontSize: { xs: "0.75rem", sm: "0.8125rem" },
+          padding: { xs: "6px 8px !important", sm: "6px 16px !important" },
           "&:last-of-type": {
             borderRight: "none",
           },

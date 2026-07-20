@@ -10,7 +10,7 @@ import { fetcher } from "@/lib/fetcher";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+    <AppRouterCacheProvider>
       <ThemeProvider theme={theme} defaultMode="system">
         <CssBaseline />
         <NuqsAdapter>
