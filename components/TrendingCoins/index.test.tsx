@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 describe("TrendingCoins", () => {
-  it("renders each trending coin with its rank", async () => {
+  it("renders each trending coin with its 24h change", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue(
@@ -20,6 +20,7 @@ describe("TrendingCoins", () => {
             market_cap_rank: 10,
             thumb: "https://example.com/doge.png",
             price_btc: 0.0000015,
+            price_change_percentage_24h: 12.5,
           },
         ])
       )
@@ -28,7 +29,8 @@ describe("TrendingCoins", () => {
     renderWithProviders(<TrendingCoins />);
 
     expect(await screen.findByText("Dogecoin")).toBeInTheDocument();
-    expect(screen.getByText(/Rank #10/i)).toBeInTheDocument();
+    expect(screen.getByText("DOGE")).toBeInTheDocument();
+    expect(screen.getByText(/\+12.5%/)).toBeInTheDocument();
   });
 
   it("shows an error alert when the request fails", async () => {

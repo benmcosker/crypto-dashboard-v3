@@ -82,6 +82,7 @@ type UpstreamTrending = {
       market_cap_rank: number | null;
       thumb: string;
       price_btc: number;
+      data?: { price_change_percentage_24h?: Record<string, number> };
     };
   }[];
 };
@@ -95,6 +96,7 @@ export async function getTrending(): Promise<TrendingCoin[]> {
     market_cap_rank: item.market_cap_rank,
     thumb: item.thumb,
     price_btc: item.price_btc,
+    price_change_percentage_24h: item.data?.price_change_percentage_24h?.usd ?? null,
   }));
 }
 

@@ -14,6 +14,7 @@ describe("MarketOverview", () => {
       vi.fn().mockResolvedValue(
         jsonResponse({
           total_market_cap: { usd: 2_500_000_000_000 },
+          total_volume: { usd: 63_670_000_000 },
           market_cap_percentage: { btc: 51.2, eth: 17.8 },
           market_cap_change_percentage_24h_usd: 1.23,
         })

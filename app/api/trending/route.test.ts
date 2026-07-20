@@ -23,6 +23,7 @@ describe("GET /api/trending", () => {
             market_cap_rank: 10,
             thumb: "https://example.com/doge.png",
             price_btc: 0.0000015,
+            data: { price_change_percentage_24h: { usd: 5.5 } },
           },
         },
       ],
@@ -39,6 +40,7 @@ describe("GET /api/trending", () => {
         market_cap_rank: 10,
         thumb: "https://example.com/doge.png",
         price_btc: 0.0000015,
+        price_change_percentage_24h: 5.5,
       },
     ]);
   });

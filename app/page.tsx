@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
@@ -83,17 +84,17 @@ export default async function Home({
             <Grid size={12}>
               <MarketOverview />
             </Grid>
-            <Grid size={{ xs: 12, md: 7 }}>
-              <LivePrices />
+            <Grid size={{ xs: 12, md: 8 }}>
+              <Stack spacing={3}>
+                <PriceHistoryChart />
+                <LivePrices />
+              </Stack>
             </Grid>
-            <Grid size={{ xs: 12, md: 5 }}>
-              <PriceHistoryChart />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TrendingCoins />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <ExchangeVolume />
+            <Grid size={{ xs: 12, md: 4 }}>
+              <Stack spacing={3}>
+                <TrendingCoins />
+                <ExchangeVolume />
+              </Stack>
             </Grid>
           </Grid>
         </SWRConfig>
