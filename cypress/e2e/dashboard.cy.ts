@@ -21,13 +21,12 @@ describe("dashboard", () => {
     cy.contains("Ethereum").should("be.visible");
     cy.contains("$65,000.12").should("be.visible");
 
-    cy.contains("Market Overview").should("be.visible");
-    cy.contains("BTC dominance").should("be.visible");
+    cy.contains("BTC Dominance").should("be.visible");
     cy.contains("52.4%").should("be.visible");
 
     cy.contains("Price History").should("be.visible");
 
-    cy.contains("Trending Coins").should("be.visible");
+    cy.contains("Trending").should("be.visible");
     cy.contains("Pepe").should("be.visible");
 
     cy.contains("Exchange Volume").should("be.visible");

@@ -27,7 +27,7 @@ describe("ExchangeVolume", () => {
     renderWithProviders(<ExchangeVolume />);
 
     expect(await screen.findByText("Binance")).toBeInTheDocument();
-    expect(screen.getByText("500,000")).toBeInTheDocument();
+    expect(screen.getByText("₿500K")).toBeInTheDocument();
   });
 
   it("shows an error alert when the request fails", async () => {

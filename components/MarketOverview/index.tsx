@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import ErrorState from "@/components/ErrorState";
 import type { GlobalData } from "@/lib/types";
 
@@ -16,13 +17,38 @@ const usdCompact = new Intl.NumberFormat("en-US", {
 });
 const pct = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 });
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({
+  label,
+  value,
+  delta,
+}: {
+  label: string;
+  value: string;
+  delta?: number;
+}) {
+  const positive = (delta ?? 0) >= 0;
   return (
-    <Grid size={{ xs: 6, sm: 3 }}>
-      <Typography variant="caption" color="text.secondary" sx={{ display: "block" }}>
-        {label}
-      </Typography>
-      <Typography variant="h6">{value}</Typography>
+    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+      <Paper
+        variant="outlined"
+        sx={{ p: 2, borderRadius: 2, bgcolor: "rgba(99, 102, 241, 0.03)" }}
+      >
+        <Typography variant="caption" color="text.secondary" sx={{ display: "block" }}>
+          {label}
+        </Typography>
+        <Typography variant="h5" sx={{ fontWeight: 700 }}>
+          {value}
+        </Typography>
+        {delta !== undefined && (
+          <Typography
+            variant="caption"
+            sx={{ color: positive ? "success.main" : "error.main", fontWeight: 600 }}
+          >
+            {positive ? "▲" : "▼"} {positive ? "+" : ""}
+            {pct.format(delta)}%
+          </Typography>
+        )}
+      </Paper>
     </Grid>
   );
 }
@@ -30,26 +56,22 @@ function Stat({ label, value }: { label: string; value: string }) {
 export default function MarketOverview() {
   const { data, error, isLoading } = useSWR<GlobalData>("/api/global");
 
+  if (error) return <ErrorState error={error} />;
+  if (isLoading) return <Skeleton variant="rounded" height={100} />;
+  if (!data) return null;
+
   return (
-    <Paper variant="outlined" sx={{ p: 2 }}>
-      <Typography variant="h6" gutterBottom>
-        Market Overview
-      </Typography>
-      {error && <ErrorState error={error} />}
-      {isLoading && <Skeleton variant="rounded" height={80} />}
-      {data && (
-        <Grid container spacing={2}>
-          <Stat label="Total market cap" value={usdCompact.format(data.total_market_cap.usd)} />
-          <Stat
-            label="24h market cap change"
-            value={`${data.market_cap_change_percentage_24h_usd >= 0 ? "+" : ""}${pct.format(
-              data.market_cap_change_percentage_24h_usd
-            )}%`}
-          />
-          <Stat label="BTC dominance" value={`${pct.format(data.market_cap_percentage.btc)}%`} />
-          <Stat label="ETH dominance" value={`${pct.format(data.market_cap_percentage.eth)}%`} />
-        </Grid>
-      )}
-    </Paper>
+    <Box>
+      <Grid container spacing={2}>
+        <Stat
+          label="Total Market Cap"
+          value={usdCompact.format(data.total_market_cap.usd)}
+          delta={data.market_cap_change_percentage_24h_usd}
+        />
+        <Stat label="24h Volume" value={usdCompact.format(data.total_volume.usd)} />
+        <Stat label="BTC Dominance" value={`${pct.format(data.market_cap_percentage.btc)}%`} />
+        <Stat label="ETH Dominance" value={`${pct.format(data.market_cap_percentage.eth)}%`} />
+      </Grid>
+    </Box>
   );
 }

@@ -17,6 +17,7 @@ export type MarketCoin = {
 export type GlobalData = {
   active_cryptocurrencies: number;
   total_market_cap: Record<string, number>;
+  total_volume: Record<string, number>;
   market_cap_percentage: Record<string, number>;
   market_cap_change_percentage_24h_usd: number;
 };
@@ -32,6 +33,7 @@ export type TrendingCoin = {
   market_cap_rank: number | null;
   thumb: string;
   price_btc: number;
+  price_change_percentage_24h: number | null;
 };
 
 export type Exchange = {

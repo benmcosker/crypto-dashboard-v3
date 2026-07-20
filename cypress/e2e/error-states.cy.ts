@@ -24,7 +24,7 @@ describe("widget error states", () => {
     cy.visit("/");
     cy.wait(["@markets", "@global", "@chart", "@trending", "@exchanges"]);
 
-    cy.contains("Trending Coins")
+    cy.contains("Trending")
       .parents(".MuiPaper-root")
       .within(() => {
         cy.contains("CoinGecko upstream error").should("be.visible");
