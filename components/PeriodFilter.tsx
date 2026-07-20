@@ -18,11 +18,33 @@ export default function PeriodFilter() {
       exclusive
       size="small"
       sx={{
-        gap: 1,
-        padding: "5px !important"
+        bgcolor: "rgba(255, 255, 255, 0.15)",
+        borderRadius: 999,
+        padding: "4px",
+        gap: "4px",
+        "& .MuiToggleButtonGroup-grouped": {
+          margin: 0,
+          border: "none",
+        },
+        "& .MuiToggleButton-root": {
+          border: "none",
+          borderRadius: "999px !important",
+          color: "primary.contrastText",
+          textTransform: "none",
+          fontWeight: 600,
+          px: 2,
+        },
+        "& .MuiToggleButton-root:hover": {
+          bgcolor: "rgba(255, 255, 255, 0.1)",
+        },
+        "& .MuiToggleButton-root.Mui-selected": {
+          bgcolor: "background.paper",
+          color: "primary.main",
+        },
+        "& .MuiToggleButton-root.Mui-selected:hover": {
+          bgcolor: "background.paper",
+        },
       }}
-
-      
       onChange={(_, value: PeriodDays | null) => {
         if (value !== null) setPeriod(value);
       }}

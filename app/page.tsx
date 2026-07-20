@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
+import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import { SWRConfig } from "swr";
 import PeriodFilter from "@/components/PeriodFilter";
 import LivePrices from "@/components/LivePrices";
@@ -55,10 +56,25 @@ export default async function Home({
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Suspense fallback={<Skeleton variant="rounded" height={600} />}>
         <SWRConfig value={{ fallback }}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-            <Typography variant="h4" component="h1">
-              Crypto Dashboard
-            </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+              px: 3,
+              py: 2,
+              borderRadius: 2,
+              bgcolor: "primary.main",
+              color: "primary.contrastText",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <CurrencyBitcoinIcon sx={{ color: "#f7931a", fontSize: 32 }} />
+              <Typography variant="h5" component="h1" sx={{ fontWeight: 700 }}>
+                Crypto Dashboard
+              </Typography>
+            </Box>
             <PeriodFilter />
           </Box>
 
