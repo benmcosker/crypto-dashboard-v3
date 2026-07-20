@@ -18,28 +18,30 @@ export default function PeriodFilter() {
       exclusive
       size="small"
       sx={{
-        bgcolor: "rgba(255, 255, 255, 0.15)",
-        borderRadius: 999,
-        padding: "4px",
-        gap: "4px",
         "& .MuiToggleButtonGroup-grouped": {
           margin: 0,
           border: "none",
+          borderRadius: "8px !important",
         },
         "& .MuiToggleButton-root": {
           border: "none",
-          borderRadius: "999px !important",
-          color: "primary.contrastText",
+          borderRight: "1px solid rgba(255, 255, 255, 0.3)",
+          color: "rgba(255, 255, 255, 0.85)",
           textTransform: "none",
-          fontWeight: 600,
-          px: 2,
+          fontWeight: 500,
+          padding: "6px 16px !important",
+          "&:last-of-type": {
+            borderRight: "none",
+          },
         },
         "& .MuiToggleButton-root:hover": {
           bgcolor: "rgba(255, 255, 255, 0.1)",
         },
         "& .MuiToggleButton-root.Mui-selected": {
           bgcolor: "background.paper",
-          color: "primary.main",
+          color: "text.primary",
+          fontWeight: 700,
+          boxShadow: 2,
         },
         "& .MuiToggleButton-root.Mui-selected:hover": {
           bgcolor: "background.paper",
