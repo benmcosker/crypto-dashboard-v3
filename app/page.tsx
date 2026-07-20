@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
-import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
+import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoinOutlined";
 import { SWRConfig } from "swr";
 import PeriodFilter from "@/components/PeriodFilter";
 import LivePrices from "@/components/LivePrices";
@@ -65,12 +65,13 @@ export default async function Home({
               px: 3,
               py: 2,
               borderRadius: 2,
-              bgcolor: "primary.main",
+              background:
+                "linear-gradient(90deg, var(--mui-palette-primary-dark) 0%, var(--mui-palette-primary-light) 100%)",
               color: "primary.contrastText",
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <CurrencyBitcoinIcon sx={{ color: "#f7931a", fontSize: 32 }} />
+              <CurrencyBitcoinIcon sx={{ color: "primary.contrastText", fontSize: 32 }} />
               <Typography variant="h5" component="h1" sx={{ fontWeight: 700 }}>
                 Crypto Dashboard
               </Typography>
